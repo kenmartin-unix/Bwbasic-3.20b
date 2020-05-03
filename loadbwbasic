@@ -1,0 +1,56 @@
+#!/bin/bash
+echo "05/03/2020 Ken. Install bwbasic-3.20b. Soup to nuts."
+echo -e "\nYou may be required to enter your password.\n"
+if [ `id -u` == "0" ]
+         then
+           echo -e "\n\nThis should not be executed as root\n\n"
+           exit
+fi
+echo -e -n "\007Press Enter to begin " ; read j
+cd ~/
+echo " "
+if [ -d "bwbasic-3.20b" ]
+  then
+    echo -e "     ===> bwbasic-3.20b directory already exists <=== \007"
+    echo "                   Can not compile"
+    echo "If this is a rerun  rm -r bwbasic-3.20b then $0"
+    echo "            Manual intervention required"
+    echo " "
+    exit
+  else
+    echo -e "Untaring, Compiling\n"
+    tar -xf bwbasic-3.20b.tar
+    echo -e "...Compiling...\n"
+    cd bwbasic-3.20b
+    make
+    echo -e "\nCompile exited\n"
+    echo -e -n "\007If no errors Press Enter " ; read j
+    echo -e "\n...Installing...\n"
+    sudo make install
+    echo -e "\nInstall exited\n"
+    echo -e -n "\007If no errors Press Enter " ; read j
+fi
+cd ~/ 
+echo " "
+if [ -d "bwbasic" ]
+	then
+		echo -e "===> bwbasic directory exists <=== \007"
+		echo " Can not overwrite existing files."
+		echo " If you have new or modified programs"
+		echo " in bwbasic temporarily move them to a"
+		echo " different folder. Then after install"
+		echo " move them back."
+		echo " If directory bwbasic in error"
+		echo " Try rm -r bwbasic and $0"
+	else
+		echo "===> Instaling bwbasic sample programs <==="
+		echo " "
+    		echo "Copying files into folder bwbasic"
+		mkdir ~/bwbasic
+		cp ~/bwbasic-3.20b/BAS-EXAMPLES/* ~/bwbasic
+    		echo "Copying completed"
+fi
+echo -e "\n\007"
+echo "You can run bwbasic at the command line. To exit bwbasic use quit"
+echo "Should be Done"
+
