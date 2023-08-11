@@ -119,5 +119,5 @@ If you come up with some ideas or enhancements or have a
 problem drop me a message keeping in mind my main goal
 is to do maintenance updates where necessary.
 
-ken.at.github@gmail.com
+ken.unix.guy@gmail.com
 Bwbasic-3.20b
